@@ -105,60 +105,60 @@ app.delete('/remainder/setremainder/:remainder',async (req,res)=>{
     })
 })
 
-nodecron.schedule('30 7 * * *', () => {
+// nodecron.schedule('30 7 * * *', () => {
 
 
-    const pool= await Connect()
-    const response = await pool.request().query('select * from Remainders')
-    const data = response.recordset
-    remainderList = data
-    console.log(data)
+//     const pool= await Connect()
+//     const response = await pool.request().query('select * from Remainders')
+//     const data = response.recordset
+//     remainderList = data
+//     console.log(data)
 
-  const tableitems = remainderList.map((el, index) => {
-  return `
-    <tr style="padding:10px;border-bottom:1px solid #eee;">
-        <td>${index + 1}</td>
-        <td>${el.Activity}</td>
-    </tr>
-  `;
-}).join(""); 
+//   const tableitems = remainderList.map((el, index) => {
+//   return `
+//     <tr style="padding:10px;border-bottom:1px solid #eee;">
+//         <td>${index + 1}</td>
+//         <td>${el.Activity}</td>
+//     </tr>
+//   `;
+// }).join(""); 
 
 
 
-  const msgtext = {
-        from: process.env.Email_id,
-        to: 'ppvarmajobs@gmail.com',
-        subject: 'Un-completed tasks in today',
-        html :`<h4>These are the tasks you have to completed before going to sleep</h4>
+//   const msgtext = {
+//         from: process.env.Email_id,
+//         to: 'ppvarmajobs@gmail.com',
+//         subject: 'Un-completed tasks in today',
+//         html :`<h4>These are the tasks you have to completed before going to sleep</h4>
 
-        <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#222;width:100vw;">
-        <table border="1" cellspacing="0" cellpadding="6" style="border-collapse:collapse;width:100%;">
-      <tr>
-        <th>#</th>
-        <th>Task</th>
-      </tr>
+//         <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#222;width:100vw;">
+//         <table border="1" cellspacing="0" cellpadding="6" style="border-collapse:collapse;width:100%;">
+//       <tr>
+//         <th>#</th>
+//         <th>Task</th>
+//       </tr>
 
-      ${tableitems}
-    </table>
-    </div>
-        `
-    };
+//       ${tableitems}
+//     </table>
+//     </div>
+//         `
+//     };
 
-        async function Sendmail(){
-            const transport = await nodemailer.connect()
+//         async function Sendmail(){
+//             const transport = await nodemailer.connect()
 
-        transport.sendMail(msgtext, (err, info) => {
-            if (err) {
-                console.log('Error:', err);
-            } else {
-                console.log('Email sent successfully:', info.response);
-                res.json({msg:'Email sent to Target Mail', status:200})
-            }
-        });
-        }
+//         transport.sendMail(msgtext, (err, info) => {
+//             if (err) {
+//                 console.log('Error:', err);
+//             } else {
+//                 console.log('Email sent successfully:', info.response);
+//                 res.json({msg:'Email sent to Target Mail', status:200})
+//             }
+//         });
+//         }
 
-        Sendmail()
-});
+//         Sendmail()
+// });
 
 
 app.listen(5005, () => {
