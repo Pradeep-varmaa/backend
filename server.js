@@ -105,8 +105,8 @@ app.delete('/remainder/setremainder/:remainder',async (req,res)=>{
     })
 })
 
-// nodecron.schedule('30 12 * * *', () => {
-app.get('/getsms', async(req,res)=>{
+nodecron.schedule('30 12 * * *', async() => {
+// app.get('/getsms', async(req,res)=>{
 
     const pool= await Connect()
     const response = await pool.request().query('select * from Remainders')
