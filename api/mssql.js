@@ -1,10 +1,10 @@
 const sql = require('mssql');
 
 const config = {
-    user : process.env.user,
-    password : process.env.password,
-    server : process.env.server,
-    database : process.env.database,
+    user : 'sa',
+    password :'1234',
+    server : 'VARMAA',
+    database : 'UserCred',
     options:{
         encrypt:true,
         trustServerCertificate: true,
@@ -23,5 +23,5 @@ async function Connect() {
 
 
 
-module.exports = { sql, Connect };
+module.exports =  { Connect };
 

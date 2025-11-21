@@ -1,21 +1,24 @@
-const nodemailer = require('nodemailer');
-require('dotenv').config()
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
-// Create a reusable transporter
-async function connect() {
+async function connectMail() {
     try {
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            service: "gmail",
             auth: {
-                user: process.env.Email_id,
-                pass: process.env.Email_pass // App password, not your real Gmail password
-            }
+                user: 'ppvarmajobs@gmail.com',
+                pass: 'jzfa hfxt zaxz okey',
+            },
         });
-        return transporter; // ✅ return it!
+
+        return transporter;
     } catch (err) {
-        console.log('Error creating transporter:', err);
+        console.error("Mailer error:", err);
     }
 }
+
+module.exports = { connectMail };
+
 
 // const msgtext = {
 //     from: 'ppvarmajobs@gmail.com',
@@ -34,5 +37,3 @@ async function connect() {
 //         }
 //     });
 // }
-
-module.exports = {connect};
