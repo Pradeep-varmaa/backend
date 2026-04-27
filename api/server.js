@@ -39,6 +39,16 @@ app.get("/remainder/getremainder", async (req, res) => {
     res.json(result.recordset);
 });
 
+app.gt('/getip', async (req, res) =>{
+
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0] ||
+    request.headers.get("x-real-ip") ||
+    "Unknown";
+
+  res.json({ IP_ADDRESS : ip });
+});
+
 nodecron.schedule(
     "52 16 * * *",
     () => {
